@@ -9,21 +9,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+import com.ren_user.beans.*;
 
 public class ServletRen extends HttpServlet {
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
-		response.setContentType("text/html");
-		response.setCharacterEncoding( "UTF-8" );
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE html>");
-		out.println("<html>");
-		out.println("<head>");
-		out.println("<meta charset=\"utf-8\" />");
-		out.println("<title>Test HTML</title>");
-		out.println("</head>");
-		out.println("<body>");
-		out.println("<p>servlet1 generates this page</p>");
-		out.println("</body>");
-		out.println("</html>");
+		
+		String paramAuteur = request.getParameter( "user" );
+		String message = "test variables : BON";
+		
+		
+		/* Création du bean */
+		User userBean = new User();
+		/* Initialisation de ses propriétés */
+		userBean.setLastname("DUPONT");
+		userBean.setFirstname( "Jean" );
+		
+		request.setAttribute( "test", message );
+		request.setAttribute( "user-informations", userBean );
+		this.getServletContext().getRequestDispatcher( "/WEB-INF/first-jsp.jsp" ).forward( request, response );
 	}
 }
