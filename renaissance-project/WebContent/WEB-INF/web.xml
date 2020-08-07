@@ -21,7 +21,18 @@
     
     <servlet-mapping>
 		<servlet-name>ServletRen</servlet-name>
-		<url-pattern>/servlet1</url-pattern>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>UserAccess</servlet-name>
+		<servlet-class>com.user_access.servlets.UserAccess</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>UserAccess</servlet-name>
+		<url-pattern>/user_access</url-pattern>
 	</servlet-mapping>
     
     

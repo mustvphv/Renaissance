@@ -6,6 +6,8 @@ public class User {
 	private String lastname;
 	private String firstname;
 	private String adress;
+	private String email;
+	private String password;
 	private boolean premium_member;
 
 
@@ -16,7 +18,7 @@ public class User {
 	public String getLastname() {
 		return this.lastname;
 	}
-
+	
 	public String getFirstname() {
 		return this.firstname;
 	}
@@ -48,5 +50,20 @@ public class User {
 	public void setPremiumMember( boolean genius ) {
 		this.premium_member = true;
 	}
+
+	
+    public void setEmail(String email) {
+	    this.email = email;
+    }
+    public String getEmail() {
+	    return email;
+    }
+
+    public void setPassword(String password) {
+	    this.password = password;
+    }
+    public String getMotDePasse() {
+	    return password;
+    }
 
 }

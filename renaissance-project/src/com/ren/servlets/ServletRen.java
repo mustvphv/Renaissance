@@ -26,6 +26,7 @@ public class ServletRen extends HttpServlet {
 		
 		request.setAttribute( "test", message );
 		request.setAttribute( "user-informations", userBean );
-		this.getServletContext().getRequestDispatcher( "/WEB-INF/first-jsp.jsp" ).forward( request, response );
+		//this.getServletContext().getRequestDispatcher( "/WEB-INF/first-jsp.jsp" ).forward( request, response );
+		this.getServletContext().getRequestDispatcher( "/WEB-INF/welcome-page.jsp" ).forward( request, response );
 	}
 }
