@@ -34,6 +34,16 @@
 		<servlet-name>UserAccess</servlet-name>
 		<url-pattern>/user_access</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RegistrationAccess</servlet-name>
+		<servlet-class>com.registration_access.servlets.RegistrationAccess</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RegistrationAccess</servlet-name>
+		<url-pattern>/registration_access</url-pattern>
+	</servlet-mapping>
     
     
 
