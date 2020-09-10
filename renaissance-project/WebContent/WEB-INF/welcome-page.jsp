@@ -19,7 +19,7 @@
         </form>
                 <br/>
                 <br/>
-        <form method="post" action="inscription">
+        <form method="get" action="registration_access">
                 <input type="submit" value="Register" class="registerClass" />
         </form>
                 <br/>
