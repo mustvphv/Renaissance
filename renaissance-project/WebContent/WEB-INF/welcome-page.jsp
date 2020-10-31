@@ -4,7 +4,8 @@
     <head>
         <meta charset="utf-8" />
         <title>Renaissance-Acceuil</title>
-        <link type="text/css" rel="stylesheet" href="form.css" />
+        <link rel="stylesheet" type="text/css" href="resources/css/register-page.css"/>
+        <link rel="shortcut icon" href="#" />
     </head>
     <body>
             <fieldset>

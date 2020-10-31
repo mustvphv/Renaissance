@@ -1,13 +1,13 @@
 package com.ren.forms;
 
 
+import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 
-import com.ren_user.beans.*;
+import com.ren_user.beans.User;
 
 
 public class RegisterForm {
@@ -34,6 +34,7 @@ public class RegisterForm {
         return errors;
     }
     
+    
     public User RegisterUser(HttpServletRequest request) {        
         String firstname = getValueFormField(request, FormField_FIRSTNAME);
         String lastname = getValueFormField(request, FormField_LASTNAME);
@@ -45,57 +46,58 @@ public class RegisterForm {
         String confirmation = getValueFormField(request, FormField_CONFIRMATION);
         
 
-        User current_user = new User();
-        
+        User currentUser = new User();
+                
         try {
             checkFirstname(firstname);
         } catch (Exception e) {
+        	currentUser.setFirstname(firstname);
             setError(FormField_FIRSTNAME, e.getMessage() );
         }
-        current_user.setFirstname(firstname);
+        currentUser.setFirstname(firstname);
         
         try {
             checkLastname(lastname);
         } catch (Exception e) {
             setError(FormField_LASTNAME, e.getMessage() );
         }
-        current_user.setLastname(lastname);
+        currentUser.setLastname(lastname);
         
         try {
             checkUsername(username);
         } catch (Exception e) {
             setError(FormField_USERNAME, e.getMessage() );
         }
-        current_user.setUsername(username);
+        currentUser.setUsername(username);
         
         try {
             checkEmail(email);
         } catch (Exception e) {
             setError(FormField_EMAIL, e.getMessage() );
         }
-        current_user.setEmail(email);
+        currentUser.setEmail(email);
         
         try {
             checkStatus(status);
         } catch (Exception e) {
             setError(FormField_STATUS, e.getMessage() );
         }
-        current_user.setStatus(status);
+        currentUser.setStatus(status);
         
         try {
             checkDepartment(department);
         } catch (Exception e) {
             setError(FormField_DEPARTMENT, e.getMessage() );
         }
-        current_user.setDepartment(department);
+        currentUser.setDepartment(department);
 
         try {
             checkPassword(password, confirmation);
         } catch (Exception e) {
-            setError(FormField_PASSWORD, e.getMessage() );
-            setError(FormField_CONFIRMATION, null );
+            setError(FormField_PASSWORD, e.getMessage());
+            setError(FormField_CONFIRMATION, null);
         }
-        current_user.setPassword(password);
+        currentUser.setPassword(password);
 
 
         if (errors.isEmpty()) {
@@ -104,7 +106,7 @@ public class RegisterForm {
             registrationStatus = "Registration failed";
         }
 
-        return current_user;
+        return currentUser;
     }
 
     
@@ -128,7 +130,7 @@ public class RegisterForm {
 			throw new Exception("Firstname must contain valid letters");
 		}
         else if(firstname != null && firstname.matches(".*[" + autorizedLettersStr + "].*")) {
-        	//throw new Exception("bonjour");
+        	//throw new Exception("test");
         }
         else{
         	throw new Exception("You have to enter a first name");
@@ -137,7 +139,7 @@ public class RegisterForm {
     }
     
     private void checkLastname(String lastname) throws Exception {
-        char[] autorizedLetters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 
+        char[] autorizedLetters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
         		'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
         		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
         		'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y','z',
@@ -150,17 +152,22 @@ public class RegisterForm {
         if (lastname != null && lastname.length() < 2) {
             throw new Exception("Lastname must contain at least 2 letters.");
         }
-        else if (lastname.matches(".*[" + autorizedLettersStr + "].*")) {
+        else if (lastname != null && !lastname.matches(".*[" + autorizedLettersStr + "].*")) {
 			throw new Exception("Lastname must contain valid letters");
 		}
+        else if(lastname != null && lastname.matches(".*[" + autorizedLettersStr + "].*")) {
+        	//throw new Exception("test");
+        }
         else {
         	throw new Exception("You have to enter a last name");
-        }    	
+        }
     }
     
     private void checkUsername(String username) throws Exception {
-        if (username != null && username.length() < 8) {
-            throw new Exception("Username must contain at least 8 letters.");
+        if (username != null) {
+        	if ( username.length() < 8) {
+                throw new Exception("Username must contain at least 8 letters.");
+            }
         }
         else {
         	throw new Exception("You have to enter a username");
@@ -207,9 +214,9 @@ public class RegisterForm {
     }
 
 
-    private static String getValueFormField( HttpServletRequest request, String FormFieldName) {
+    private static String getValueFormField(HttpServletRequest request, String FormFieldName) {
         String valeur = request.getParameter(FormFieldName);
-        if ( valeur == null || valeur.trim().length() == 0 ) {
+        if (valeur == null || valeur.trim().length() == 0) {
             return null;
         } else {
             return valeur.trim();
