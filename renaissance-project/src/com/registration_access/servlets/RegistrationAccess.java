@@ -1,6 +1,11 @@
 package com.registration_access.servlets;
 
+import java.io.Console;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Locale.Category;
+
 import com.ren.forms.*;
 import com.ren_user.beans.*;
 
@@ -14,8 +19,10 @@ import javax.servlet.http.HttpServlet;
 
 public class RegistrationAccess extends HttpServlet {
     
-    public static final String ATTRIBUTE_USER = "utilisateur";
+    public static final String ATTRIBUTE_USER = "currentUser";
     public static final String ATTRIBUTE_FORM = "registerForm";
+    public static final String ATTRIBUTE_STATUS = "status";
+    public static final String ATTRIBUTE_DEPARTMENT = "department";
     public static final String VIEW = "/WEB-INF/register-page.jsp";
 	
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -31,8 +38,11 @@ public class RegistrationAccess extends HttpServlet {
         
         request.setAttribute(ATTRIBUTE_FORM, registerForm);
         request.setAttribute(ATTRIBUTE_USER, currentUser);
+        request.setAttribute(ATTRIBUTE_STATUS, currentUser.getStatus());
+        request.setAttribute(ATTRIBUTE_DEPARTMENT, currentUser.getDepartment());
         
-        
+
+               
 		
         this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
     }
